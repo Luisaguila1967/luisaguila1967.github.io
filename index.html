@@ -1,0 +1,2160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sk Sakhiruddin — Software Developer</title>
+  <meta name="description" content="Sk Sakhiruddin — Full Stack JavaScript Developer from Kolkata, India. Building modern web and mobile applications with React, Next.js, TypeScript and Node.js." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Colors */
+      --bg: #080B10;
+      --bg-secondary: #0E131A;
+      --card: #141A22;
+      --text-primary: #F5F7FA;
+      --text-secondary: #9AA4B2;
+      --border: #252D38;
+      --accent-primary: #7C5CFC;
+      --accent-secondary: #4F9CF9;
+      --success: #45D483;
+
+      /* Syntax colors for code panel */
+      --syntax-keyword: #C792EA;
+      --syntax-string: #C3E88D;
+      --syntax-fn: #82AAFF;
+      --syntax-prop: #F78C6C;
+      --syntax-punct: #89DDFF;
+      --syntax-comment: #546E7A;
+      --syntax-var: #FFCB6B;
+
+      /* Typography */
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Spacing */
+      --section-padding: clamp(4rem, 10vw, 8rem);
+      --container-max: 1200px;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ===== LAYOUT HELPERS ===== */
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: var(--section-padding) 0;
+      position: relative;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-primary);
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent-primary);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: #6B4DFA;
+      box-shadow: 0 0 24px rgba(124, 92, 252, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: var(--card);
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent-secondary);
+      box-shadow: 0 0 16px rgba(79, 156, 249, 0.15);
+    }
+
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 11, 16, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .nav-brand .name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+    .nav-brand .role {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.08em;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-right: 0.5rem;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      padding: 0.4rem 0.7rem;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--text-primary);
+      background: rgba(124, 92, 252, 0.08);
+    }
+
+    .nav-socials {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-right: 0.5rem;
+    }
+    .nav-socials a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+    .nav-socials a:hover {
+      color: var(--text-primary);
+      background: var(--card);
+      border: 1px solid var(--border);
+    }
+    .nav-socials svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .nav-toggle {
+      display: none;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: clamp(3rem, 8vw, 6rem);
+      padding-bottom: var(--section-padding);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(124, 92, 252, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -200px;
+      left: -100px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(79, 156, 249, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-secondary);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 .highlight {
+      color: var(--accent-primary);
+      position: relative;
+    }
+
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-links a {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .hero-links a:hover {
+      color: var(--text-primary);
+    }
+    .hero-links svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .hero-status .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 8px var(--success);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ===== CODE PANEL ===== */
+    .code-panel {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--border);
+    }
+    .code-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+    .code-dot.r { background: #FF5F56; }
+    .code-dot.y { background: #FFBD2E; }
+    .code-dot.g { background: #27C93F; }
+    .code-filename {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-left: 0.5rem;
+    }
+
+    .code-body {
+      padding: 1.25rem 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
+    .code-body .ln {
+      color: var(--syntax-comment);
+      user-select: none;
+      display: inline-block;
+      width: 1.5rem;
+      text-align: right;
+      margin-right: 1rem;
+    }
+    .kw { color: var(--syntax-keyword); }
+    .str { color: var(--syntax-string); }
+    .fn { color: var(--syntax-fn); }
+    .prop { color: var(--syntax-prop); }
+    .punct { color: var(--syntax-punct); }
+    .var { color: var(--syntax-var); }
+    .comment { color: var(--syntax-comment); font-style: italic; }
+    .num { color: #F78C6C; }
+
+    /* Floating badges */
+    .badge-floats {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .float-badge {
+      position: absolute;
+      padding: 0.35rem 0.75rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-primary);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      animation: float 4s ease-in-out infinite;
+    }
+    .float-badge.b1 { top: -12px; right: 20px; animation-delay: 0s; }
+    .float-badge.b2 { bottom: 30px; left: -16px; animation-delay: 1s; }
+    .float-badge.b3 { top: 45%; right: -14px; animation-delay: 2s; }
+    .float-badge.b4 { bottom: -12px; right: 30%; animation-delay: 0.5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* ===== ABOUT ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+    }
+
+    .timeline {
+      border-left: 2px solid var(--border);
+      padding-left: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .timeline-item {
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.65rem;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      border: 2px solid var(--bg);
+    }
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-secondary);
+      margin-bottom: 0.25rem;
+    }
+    .timeline-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .timeline-org {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* ===== SKILLS ===== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .skills-grid .skill-cat:nth-child(4),
+    .skills-grid .skill-cat:nth-child(5),
+    .skills-grid .skill-cat:nth-child(6) {
+      grid-column: span 2;
+    }
+    .skills-grid .skill-cat:nth-child(6) {
+      grid-column: span 2;
+    }
+
+    .skill-cat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .skill-cat:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-4px);
+    }
+
+    .skill-cat h3 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .skill-cat h3 .icon-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .skill-tag {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      padding: 0.3rem 0.7rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+    .skill-tag:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-secondary);
+      background: rgba(79, 156, 249, 0.06);
+    }
+
+    /* ===== EXPERIENCE ===== */
+    .exp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .exp-company {
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      color: var(--accent-secondary);
+      margin-bottom: 0.25rem;
+    }
+    .exp-role {
+      font-size: 1.4rem;
+    }
+    .exp-period {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .exp-desc {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .exp-resp {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+    .exp-resp li {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: border-color 0.2s;
+    }
+    .exp-resp li:hover {
+      border-color: var(--accent-primary);
+    }
+    .exp-resp li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      flex-shrink: 0;
+    }
+
+    /* ===== PROJECTS ===== */
+    .project {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+      transition: border-color 0.3s;
+    }
+    .project:hover {
+      border-color: var(--accent-primary);
+    }
+
+    .project-number {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-primary);
+      letter-spacing: 0.1em;
+    }
+
+    .project-name {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin: 0.25rem 0 0.25rem;
+    }
+
+    .project-category {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .project-desc {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .tech-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 0.25rem 0.6rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      color: var(--text-secondary);
+    }
+
+    .project-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .project-features li {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .project-features li::before {
+      content: '▹';
+      color: var(--accent-primary);
+      flex-shrink: 0;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* StutorPro — featured large */
+    .project-featured .project-content {
+      padding: 2.5rem;
+    }
+    .project-featured .project-visual {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Dashboard mockup */
+    .dash-mockup {
+      width: 100%;
+      max-width: 680px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .dash-topbar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dash-topbar .d-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .dash-body {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      min-height: 240px;
+    }
+    .dash-sidebar {
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border);
+      padding: 1rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .dash-sidebar .sb-item {
+      height: 10px;
+      border-radius: 4px;
+      background: var(--border);
+    }
+    .dash-sidebar .sb-item.active {
+      background: var(--accent-primary);
+    }
+    .dash-main {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .dash-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+    }
+    .dash-stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.6rem;
+    }
+    .dash-stat .ds-label {
+      height: 8px;
+      width: 60%;
+      background: var(--border);
+      border-radius: 3px;
+      margin-bottom: 0.5rem;
+    }
+    .dash-stat .ds-value {
+      height: 14px;
+      width: 40%;
+      background: var(--accent-primary);
+      border-radius: 3px;
+    }
+    .dash-chart {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem;
+      display: flex;
+      align-items: end;
+      gap: 0.4rem;
+    }
+    .dash-bar {
+      flex: 1;
+      background: linear-gradient(to top, var(--accent-primary), var(--accent-secondary));
+      border-radius: 3px 3px 0 0;
+      opacity: 0.7;
+    }
+
+    /* Aarogya — split layout */
+    .project-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .project-split .project-visual {
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .project-split .project-content {
+      padding: 2.5rem;
+    }
+
+    /* Healthcare mockup */
+    .health-mockup {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .health-top {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .health-top .ht-title {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+    .health-top .ht-badge {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      padding: 0.15rem 0.5rem;
+      background: rgba(69, 212, 131, 0.1);
+      color: var(--success);
+      border-radius: 4px;
+    }
+    .health-grid {
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.6rem;
+    }
+    .health-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem;
+    }
+    .health-card .hc-icon {
+      width: 24px; height: 24px;
+      border-radius: 6px;
+      background: rgba(124, 92, 252, 0.12);
+      margin-bottom: 0.5rem;
+    }
+    .health-card .hc-label {
+      height: 8px; width: 70%;
+      background: var(--border);
+      border-radius: 3px;
+      margin-bottom: 0.35rem;
+    }
+    .health-card .hc-value {
+      height: 12px; width: 40%;
+      background: var(--accent-secondary);
+      border-radius: 3px;
+    }
+
+    /* Distributor — phone mockup */
+    .project-mobile {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 0;
+    }
+    .project-mobile .phone-wrap {
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .project-mobile .project-content {
+      padding: 2.5rem;
+    }
+
+    .phone {
+      width: 200px;
+      height: 400px;
+      background: #0a0d12;
+      border: 3px solid #2a2f3a;
+      border-radius: 28px;
+      padding: 10px;
+      box-shadow: 0 0 40px rgba(124, 92, 252, 0.15);
+      position: relative;
+    }
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 5px;
+      background: #2a2f3a;
+      border-radius: 3px;
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .phone-header {
+      padding: 1.5rem 1rem 0.75rem;
+      text-align: center;
+    }
+    .phone-header .ph-title {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      color: var(--text-primary);
+    }
+    .phone-header .ph-sub {
+      font-size: 0.55rem;
+      color: var(--text-secondary);
+      margin-top: 0.2rem;
+    }
+    .phone-stats {
+      padding: 0.75rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .phone-stat {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .phone-stat .ps-val {
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      color: var(--accent-primary);
+    }
+    .phone-stat .ps-label {
+      font-size: 0.45rem;
+      color: var(--text-secondary);
+      margin-top: 0.15rem;
+    }
+    .phone-list {
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .phone-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .phone-item .pi-icon {
+      width: 20px; height: 20px;
+      border-radius: 5px;
+      background: rgba(79, 156, 249, 0.12);
+      flex-shrink: 0;
+    }
+    .phone-item .pi-text {
+      flex: 1;
+    }
+    .phone-item .pi-name {
+      height: 6px; width: 60%;
+      background: var(--border);
+      border-radius: 2px;
+      margin-bottom: 0.25rem;
+    }
+    .phone-item .pi-sub {
+      height: 5px; width: 35%;
+      background: var(--border);
+      border-radius: 2px;
+    }
+    .phone-nav {
+      display: flex;
+      justify-content: space-around;
+      padding: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .phone-nav .pn-item {
+      width: 18px; height: 18px;
+      border-radius: 4px;
+      background: var(--border);
+    }
+    .phone-nav .pn-item.active {
+      background: var(--accent-primary);
+    }
+
+    /* Chat Application — split reverse layout (content left, visual right) */
+    .project-split-reverse {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .project-split-reverse .project-content {
+      padding: 2.5rem;
+    }
+    .project-split-reverse .project-visual {
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Chat mockup */
+    .chat-mockup {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 360px;
+    }
+    .chat-sidebar {
+      display: none;
+    }
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+    .chat-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      flex-shrink: 0;
+    }
+    .chat-header-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .chat-header-name {
+      height: 8px;
+      width: 45%;
+      background: var(--text-secondary);
+      border-radius: 3px;
+      opacity: 0.6;
+    }
+    .chat-header-status {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.65rem;
+      color: var(--success);
+    }
+    .chat-header-status .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 6px var(--success);
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      overflow: hidden;
+    }
+    .chat-msg {
+      max-width: 72%;
+      padding: 0.5rem 0.85rem;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+    .chat-msg.incoming {
+      align-self: flex-start;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      border-bottom-left-radius: 3px;
+    }
+    .chat-msg.outgoing {
+      align-self: flex-end;
+      background: var(--accent-primary);
+      color: #fff;
+      border-bottom-right-radius: 3px;
+    }
+    .chat-msg .msg-line {
+      height: 7px;
+      border-radius: 2px;
+      background: currentColor;
+      opacity: 0.5;
+      margin-bottom: 0.3rem;
+    }
+    .chat-msg .msg-line:last-child {
+      margin-bottom: 0;
+    }
+    .chat-msg.incoming .msg-line { width: 85%; }
+    .chat-msg.incoming .msg-line.short { width: 55%; }
+    .chat-msg.outgoing .msg-line { width: 80%; background: #fff; opacity: 0.7; }
+    .chat-msg.outgoing .msg-line.short { width: 50%; }
+    .chat-input {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+    .chat-input-field {
+      flex: 1;
+      height: 30px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .chat-send-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .chat-send-btn::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 8px solid #fff;
+      transform: rotate(90deg);
+      margin-left: 2px;
+    }
+
+    /* ===== STATS ===== */
+    .stats {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .stat-item .stat-value {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+    .stat-item .stat-value .accent {
+      color: var(--accent-primary);
+    }
+    .stat-item .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* ===== PROCESS ===== */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      position: relative;
+    }
+    .process-step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      transition: all 0.25s;
+      position: relative;
+    }
+    .process-step:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-4px);
+    }
+    .process-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-primary);
+      margin-bottom: 0.75rem;
+    }
+    .process-step h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+    .process-step p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(124, 92, 252, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .contact h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .contact p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    .contact-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .contact-info-item a:hover {
+      color: var(--text-primary);
+    }
+    .contact-info-item svg {
+      width: 18px; height: 18px;
+      color: var(--accent-primary);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 0 2rem;
+      background: var(--bg-secondary);
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-brand .name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .footer-brand .role {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+    .footer-brand .loc {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+    .footer-col h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .footer-col a {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .footer-col a:hover {
+      color: var(--text-primary);
+    }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-grid > * {
+      animation: fadeInUp 0.7s ease-out both;
+    }
+    .hero-grid > *:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 968px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .skills-grid .skill-cat:nth-child(4),
+      .skills-grid .skill-cat:nth-child(5),
+      .skills-grid .skill-cat:nth-child(6) {
+        grid-column: span 1;
+      }
+      .exp-resp {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .project-split {
+        grid-template-columns: 1fr;
+      }
+      .project-split .project-visual {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      .project-split-reverse {
+        grid-template-columns: 1fr;
+      }
+      .project-split-reverse .project-visual {
+        border-left: none;
+        border-bottom: 1px solid var(--border);
+      }
+      .project-mobile {
+        grid-template-columns: 1fr;
+      }
+      .project-mobile .phone-wrap {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+      .footer-brand {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+      .nav-brand .role {
+        display: none;
+      }
+      .nav-inner {
+        height: 56px;
+      }
+      .nav-right .btn {
+        padding: 0.4rem 0.85rem;
+        font-size: 0.8rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+      .exp-resp {
+        grid-template-columns: 1fr;
+      }
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+      .project-features {
+        grid-template-columns: 1fr;
+      }
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+      .footer-brand {
+        grid-column: span 1;
+      }
+      .exp-card {
+        padding: 1.5rem;
+      }
+      .project-featured .project-content,
+      .project-split .project-content,
+      .project-split-reverse .project-content,
+      .project-mobile .project-content {
+        padding: 1.5rem;
+      }
+      .contact-buttons {
+        flex-direction: column;
+      }
+      .contact-buttons .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .hero-buttons {
+        flex-direction: column;
+      }
+      .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .dash-body {
+        grid-template-columns: 1fr;
+      }
+      .dash-sidebar {
+        display: none;
+      }
+      .phone {
+        width: 170px;
+        height: 340px;
+      }
+    }
+
+    /* ===== REDUCED MOTION ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+  <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="nav-brand">
+        <span class="name">SK SAKHIRUDDIN</span>
+        <span class="role">SOFTWARE DEVELOPER</span>
+      </a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="nav-socials">
+          <a href="https://github.com/SakhirCodeSigma" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.3-3.88-1.3-.53-1.3-1.3-1.3-1.3-1.06-.72.08-.71.08-.71 1.17.08 1.1.84 1.2 1.2 1.04 1.79 2.73 1.28 3.4.98.1-.76.41-1.28.74-1.57-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 5.82 0c2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/sakhiruddin/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          </a>
+        </div>
+        <a href="#contact" class="btn btn-primary btn-sm">Let's Talk →</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="hero-label">SOFTWARE DEVELOPER · KOLKATA, INDIA</div>
+          <h1>I build modern <span class="highlight">digital products</span> that solve real problems.</h1>
+          <p class="hero-desc">I'm a software developer focused on building modern web and mobile applications using React, Next.js, TypeScript, Node.js and related technologies.</p>
+          <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">View My Work →</a>
+            <a href="#contact" class="btn btn-outline">Let's Connect →</a>
+          </div>
+          <div class="hero-links">
+            <a href="https://github.com/SakhirCodeSigma" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.3-3.88-1.3-.53-1.3-1.3-1.3-1.3-1.06-.72.08-.71.08-.71 1.17.08 1.1.84 1. 1.2 1.04 1.79 2.73 1.28 3.4.98.1-.76.41-1.28.74-1.57-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 5.82 0c2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/sakhiruddin/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+          <div class="hero-status">
+            <span class="dot"></span>
+            Open to interesting opportunities
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="code-panel">
+            <div class="code-header">
+              <span class="code-dot r"></span>
+              <span class="code-dot y"></span>
+              <span class="code-dot g"></span>
+              <span class="code-filename">developer.ts</span>
+            </div>
+            <div class="code-body">
+<span class="ln">1</span><span class="kw">const</span> <span class="var">developer</span> <span class="punct">=</span> <span class="punct">{</span><br>
+<span class="ln">2</span>&nbsp;&nbsp;<span class="prop">name</span><span class="punct">:</span> <span class="str">"Sk Sakhiruddin"</span><span class="punct">,</span><br>
+<span class="ln">3</span>&nbsp;&nbsp;<span class="prop">role</span><span class="punct">:</span> <span class="str">"Software Developer"</span><span class="punct">,</span><br>
+<span class="ln">4</span>&nbsp;&nbsp;<span class="prop">location</span><span class="punct">:</span> <span class="str">"Kolkata, India"</span><span class="punct">,</span><br>
+<span class="ln">5</span>&nbsp;&nbsp;<span class="prop">focus</span><span class="punct">:</span> <span class="punct">[</span><br>
+<span class="ln">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"React"</span><span class="punct">,</span><br>
+<span class="ln">7</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Next.js"</span><span class="punct">,</span><br>
+<span class="ln">8</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"TypeScript"</span><span class="punct">,</span><br>
+<span class="ln">9</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Node.js"</span><br>
+<span class="ln">10</span>&nbsp;&nbsp;<span class="punct">],</span><br>
+<span class="ln">11</span>&nbsp;&nbsp;<span class="prop">available</span><span class="punct">:</span> <span class="kw">true</span><br>
+<span class="ln">12</span><span class="punct">};</span>
+            </div>
+            <div class="badge-floats">
+              <span class="float-badge b1">React</span>
+              <span class="float-badge b2">Next.js</span>
+              <span class="float-badge b3">TypeScript</span>
+              <span class="float-badge b4">Node.js</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about">
+    <div class="container">
+      <div class="section-label">// about-me</div>
+      <h2 class="section-title">A developer who likes building things that actually work.</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I'm a software developer working across frontend, backend, APIs, databases, authentication, integrations and production-ready application development.</p>
+          <p>My primary focus is JavaScript and TypeScript development, with strong experience around React, Next.js and Node.js. I enjoy turning product ideas into clean, functional and scalable applications.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">2021 — 2023</div>
+            <div class="timeline-title">Software Development Education</div>
+            <div class="timeline-org">Edureify Skills Academy</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2022</div>
+            <div class="timeline-title">Graduated</div>
+            <div class="timeline-org">University of Calcutta</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2023 — Present</div>
+            <div class="timeline-title">Software Developer</div>
+            <div class="timeline-org">Codesigma Technology Services</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-label">// skills</div>
+      <h2 class="section-title">Technologies I Work With</h2>
+      <p class="section-subtitle">A focused toolkit built around the JavaScript and TypeScript ecosystem.</p>
+      <div class="skills-grid">
+        <div class="skill-cat">
+          <h3><span class="icon-dot"></span> Frontend</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Next.js</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Redux</span>
+            <span class="skill-tag">Zustand</span>
+            <span class="skill-tag">Mantine</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h3><span class="icon-dot"></span> Backend</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Express.js</span>
+            <span class="skill-tag">NestJS</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h3><span class="icon-dot"></span> Database</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">MySQL</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h3><span class="icon-dot"></span> Mobile</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">React Native</span>
+            <span class="skill-tag">Expo</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h3><span class="icon-dot"></span> Tools &amp; Platforms</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">GitHub</span>
+            <span class="skill-tag">Firebase</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">JWT</span>
+            <span class="skill-tag">Jitsi</span>
+            <span class="skill-tag">Razorpay</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h3><span class="icon-dot"></span> CMS</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Strapi</span>
+            <span class="skill-tag">Payload CMS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERIENCE ===== -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-label">// experience</div>
+      <h2 class="section-title">Experience</h2>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Codesigma Technology Services</div>
+            <div class="exp-role">Software Developer</div>
+          </div>
+          <div class="exp-period">April 2023 — Present</div>
+        </div>
+        <p class="exp-desc">Developing and maintaining modern web and mobile applications using React, Next.js, TypeScript, Node.js and related technologies.</p>
+        <ul class="exp-resp">
+          <li>Frontend development</li>
+          <li>Backend / API development</li>
+          <li>Database integration</li>
+          <li>Authentication</li>
+          <li>Third-party integrations</li>
+          <li>Responsive UI development</li>
+          <li>Mobile application development</li>
+          <li>Debugging and optimization</li>
+          <li>Production-ready app development</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-label">// projects</div>
+      <h2 class="section-title">Selected Projects</h2>
+      <p class="section-subtitle">Real-world applications I've worked on.</p>
+
+      <!-- PROJECT 01: StutorPro — Featured -->
+      <article class="project project-featured">
+        <div class="project-visual">
+          <div class="dash-mockup">
+            <div class="dash-topbar">
+              <span class="d-dot" style="background:#FF5F56"></span>
+              <span class="d-dot" style="background:#FFBD2E"></span>
+              <span class="d-dot" style="background:#27C93F"></span>
+            </div>
+            <div class="dash-body">
+              <div class="dash-sidebar">
+                <div class="sb-item active"></div>
+                <div class="sb-item"></div>
+                <div class="sb-item"></div>
+                <div class="sb-item"></div>
+                <div class="sb-item"></div>
+              </div>
+              <div class="dash-main">
+                <div class="dash-cards">
+                  <div class="dash-stat"><div class="ds-label"></div><div class="ds-value"></div></div>
+                  <div class="dash-stat"><div class="ds-label"></div><div class="ds-value"></div></div>
+                  <div class="dash-stat"><div class="ds-label"></div><div class="ds-value"></div></div>
+                </div>
+                <div class="dash-chart">
+                  <div class="dash-bar" style="height:40%"></div>
+                  <div class="dash-bar" style="height:65%"></div>
+                  <div class="dash-bar" style="height:30%"></div>
+                  <div class="dash-bar" style="height:80%"></div>
+                  <div class="dash-bar" style="height:55%"></div>
+                  <div class="dash-bar" style="height:70%"></div>
+                  <div class="dash-bar" style="height:45%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-number">PROJECT 01</div>
+          <h3 class="project-name">StutorPro</h3>
+          <div class="project-category">Tutor Marketplace / EdTech Platform</div>
+          <p class="project-desc">StutorPro is a tutor marketplace platform connecting students and teachers through tutor discovery, trial bookings, online classes, attendance and payments.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Mantine</span>
+            <span class="tech-tag">React Query</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">MongoDB</span>
+            <span class="tech-tag">Jitsi</span>
+            <span class="tech-tag">Razorpay</span>
+          </div>
+          <ul class="project-features">
+            <li>Student &amp; teacher marketplace</li>
+            <li>Tutor discovery</li>
+            <li>Trial booking</li>
+            <li>Online classes</li>
+            <li>Jitsi integration</li>
+            <li>Attendance</li>
+            <li>Authentication</li>
+            <li>Payments</li>
+            <li>Student dashboards</li>
+            <li>Teacher dashboards</li>
+          </ul>
+          <div class="project-actions">
+            <a href="https://github.com/codesigmatech/StutorPro" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.3-3.88-1.3-.53-1.3-1.3-1.3-1.3-1.06-.72.08-.71.08-.71 1.17.08 1.1.84 1. 1.2 1.04 1.79 2.73 1.28 3.4.98.1-.76.41-1.28.74-1.57-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 5.82 0c2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              GitHub
+            </a>
+            <a href="https://github.com/codesigmatech/StutorPro" target="_blank" rel="noopener" class="btn btn-outline btn-sm">View Project →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 02: Aarogya — Split layout -->
+      <article class="project project-split">
+        <div class="project-visual">
+          <div class="health-mockup">
+            <div class="health-top">
+              <span class="ht-title">Aarogya · Healthcare ERP</span>
+              <span class="ht-badge">● Multi-tenant</span>
+            </div>
+            <div class="health-grid">
+              <div class="health-card"><div class="hc-icon"></div><div class="hc-label"></div><div class="hc-value"></div></div>
+              <div class="health-card"><div class="hc-icon"></div><div class="hc-label"></div><div class="hc-value"></div></div>
+              <div class="health-card"><div class="hc-icon"></div><div class="hc-label"></div><div class="hc-value"></div></div>
+              <div class="health-card"><div class="hc-icon"></div><div class="hc-label"></div><div class="hc-value"></div></div>
+              <div class="health-card"><div class="hc-icon"></div><div class="hc-label"></div><div class="hc-value"></div></div>
+              <div class="health-card"><div class="hc-icon"></div><div class="hc-label"></div><div class="hc-value"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-number">PROJECT 02</div>
+          <h3 class="project-name">Aarogya</h3>
+          <div class="project-category">Healthcare ERP / SaaS</div>
+          <p class="project-desc">Aarogya is a healthcare ERP platform designed for clinics and healthcare businesses, covering staff, doctors, patients, medicines, laboratory operations, prescriptions, billing and reporting.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Firebase</span>
+            <span class="tech-tag">Node.js</span>
+          </div>
+          <ul class="project-features">
+            <li>Multi-tenant architecture</li>
+            <li>Staff management</li>
+            <li>Doctor management</li>
+            <li>Patient management</li>
+            <li>Medicine management</li>
+            <li>Laboratory management</li>
+            <li>Prescriptions</li>
+            <li>Billing</li>
+            <li>Reports</li>
+            <li>Authentication</li>
+            <li>Clinic management</li>
+          </ul>
+          <div class="project-actions">
+            <a href="https://github.com/SakhirCodeSigma" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.3-3.88-1.3-.53-1.3-1.3-1.3-1.3-1.06-.72.08-.71.08-.71 1.17.08 1.1.84 1. 1.2 1.04 1.79 2.73 1.28 3.4.98.1-.76.41-1.28.74-1.57-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 5.82 0c2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              GitHub
+            </a>
+            <a href="https://github.com/SakhirCodeSigma" target="_blank" rel="noopener" class="btn btn-outline btn-sm">View Project →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 03: Distributor App — Phone mockup -->
+      <article class="project project-mobile">
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-header">
+                <div class="ph-title">Distributor App</div>
+                <div class="ph-sub">Stock &amp; Orders</div>
+              </div>
+              <div class="phone-stats">
+                <div class="phone-stat"><div class="ps-val">128</div><div class="ps-label">Products</div></div>
+                <div class="phone-stat"><div class="ps-val">24</div><div class="ps-label">Orders</div></div>
+                <div class="phone-stat"><div class="ps-val">₹48k</div><div class="ps-label">Revenue</div></div>
+              </div>
+              <div class="phone-list">
+                <div class="phone-item"><div class="pi-icon"></div><div class="pi-text"><div class="pi-name"></div><div class="pi-sub"></div></div></div>
+                <div class="phone-item"><div class="pi-icon"></div><div class="pi-text"><div class="pi-name"></div><div class="pi-sub"></div></div></div>
+                <div class="phone-item"><div class="pi-icon"></div><div class="pi-text"><div class="pi-name"></div><div class="pi-sub"></div></div></div>
+                <div class="phone-item"><div class="pi-icon"></div><div class="pi-text"><div class="pi-name"></div><div class="pi-sub"></div></div></div>
+              </div>
+              <div class="phone-nav">
+                <div class="pn-item active"></div>
+                <div class="pn-item"></div>
+                <div class="pn-item"></div>
+                <div class="pn-item"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-number">PROJECT 03</div>
+          <h3 class="project-name">Distributor Stock &amp; Order Management</h3>
+          <div class="project-category">React Native Mobile Application</div>
+          <p class="project-desc">A mobile application designed for distributor stock management, order processing and day-to-day business operations.</p>
+          <div class="project-tech">
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">Expo</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">REST APIs</span>
+          </div>
+          <ul class="project-features">
+            <li>Stock management</li>
+            <li>Order management</li>
+            <li>Distributor workflows</li>
+            <li>Mobile-first interface</li>
+            <li>API integration</li>
+            <li>Authentication</li>
+          </ul>
+          <div class="project-actions">
+            <a href="https://github.com/SakhirCodeSigma" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.3-3.88-1.3-.53-1.3-1.3-1.3-1.3-1.06-.72.08-.71.08-.71 1.17.08 1.1.84 1. 1.2 1.04 1.79 2.73 1.28 3.4.98.1-.76.41-1.28.74-1.57-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 5.82 0c2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              GitHub
+            </a>
+            <a href="https://github.com/SakhirCodeSigma" target="_blank" rel="noopener" class="btn btn-outline btn-sm">View Project →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 04: Chat Application — Split reverse layout -->
+      <article class="project project-split-reverse">
+        <div class="project-content">
+          <div class="project-number">PROJECT 04</div>
+          <h3 class="project-name">Chat Application</h3>
+          <div class="project-category">Real-Time Communication / Full Stack Application</div>
+          <p class="project-desc">A full-stack real-time chat application built with NestJS, designed for fast and reliable communication between users.</p>
+          <div class="project-tech">
+            <span class="tech-tag">NestJS</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">WebSockets</span>
+            <span class="tech-tag">REST API</span>
+          </div>
+          <ul class="project-features">
+            <li>Real-time messaging</li>
+            <li>User authentication</li>
+            <li>One-to-one conversations</li>
+            <li>Message delivery</li>
+            <li>WebSocket communication</li>
+            <li>REST APIs</li>
+            <li>User management</li>
+            <li>Conversation management</li>
+            <li>Backend architecture with NestJS</li>
+          </ul>
+          <div class="project-actions">
+            <a href="https://github.com/SakhirCodeSigma" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.3-3.88-1.3-.53-1.3-1.3-1.3-1.3-1.06-.72.08-.71.08-.71 1.17.08 1.1.84 1. 1.2 1.04 1.79 2.73 1.28 3.4.98.1-.76.41-1.28.74-1.57-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 5.82 0c2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              GitHub
+            </a>
+            <a href="https://github.com/SakhirCodeSigma" target="_blank" rel="noopener" class="btn btn-outline btn-sm">View Project →</a>
+          </div>
+        </div>
+        <div class="project-visual">
+          <div class="chat-mockup">
+            <div class="chat-header">
+              <div class="chat-avatar"></div>
+              <div class="chat-header-info">
+                <div class="chat-header-name"></div>
+                <div class="chat-header-status"><span class="status-dot"></span> Online</div>
+              </div>
+            </div>
+            <div class="chat-messages">
+              <div class="chat-msg incoming">
+                <div class="msg-line"></div>
+                <div class="msg-line short"></div>
+              </div>
+              <div class="chat-msg outgoing">
+                <div class="msg-line"></div>
+                <div class="msg-line short"></div>
+              </div>
+              <div class="chat-msg incoming">
+                <div class="msg-line"></div>
+              </div>
+              <div class="chat-msg outgoing">
+                <div class="msg-line"></div>
+                <div class="msg-line short"></div>
+              </div>
+              <div class="chat-msg incoming">
+                <div class="msg-line"></div>
+                <div class="msg-line short"></div>
+              </div>
+            </div>
+            <div class="chat-input">
+              <div class="chat-input-field"></div>
+              <div class="chat-send-btn"></div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value">3+ <span class="accent">Years</span></div>
+          <div class="stat-label">Software Development</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Featured Projects</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">Web + Mobile</div>
+          <div class="stat-label">Development</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">JavaScript</div>
+          <div class="stat-label">Primary Ecosystem</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS ===== -->
+  <section id="process">
+    <div class="container">
+      <div class="section-label">// process</div>
+      <h2 class="section-title">How I Build</h2>
+      <p class="section-subtitle">A practical approach to shipping production-ready software.</p>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="process-num">01 — UNDERSTAND</div>
+          <h3>Understand</h3>
+          <p>Understand the product, users and requirements.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">02 — DESIGN</div>
+          <h3>Design</h3>
+          <p>Create clean interfaces and practical user flows.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">03 — DEVELOP</div>
+          <h3>Develop</h3>
+          <p>Build frontend, backend, APIs and integrations.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">04 — REFINE</div>
+          <h3>Refine</h3>
+          <p>Test, debug, optimize and prepare for production.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="section-label">// contact</div>
+        <h2>Have an idea? Let's build it.</h2>
+        <p>Whether you're building a product, improving an existing application or looking for a developer to turn an idea into reality, feel free to reach out.</p>
+        <div class="contact-buttons">
+          <a href="https://github.com/SakhirCodeSigma" target="_blank" rel="noopener" class="btn btn-ghost">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.3-3.88-1.3-.53-1.3-1.3-1.3-1.3-1.06-.72.08-.71.08-.71 1.17.08 1.1.84 1. 1.2 1.04 1.79 2.73 1.28 3.4.98.1-.76.41-1.28.74-1.57-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 5.82 0c2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            GitHub →
+          </a>
+          <a href="https://www.linkedin.com/in/sakhiruddin/" target="_blank" rel="noopener" class="btn btn-ghost">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+            LinkedIn →
+          </a>
+          <a href="https://www.linkedin.com/in/sakhiruddin/" target="_blank" rel="noopener" class="btn btn-primary">Let's Connect →</a>
+        </div>
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Howrah · Kolkata · West Bengal, India
+          </div>
+          <div class="contact-info-item">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.3-3.88-1.3-.53-1.3-1.3-1.3-1.3-1.06-.72.08-.71.08-.71 1.17.08 1.1.84 1. 1.2 1.04 1.79 2.73 1.28 3.4.98.1-.76.41-1.28.74-1.57-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 5.82 0c2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            <a href="https://github.com/SakhirCodeSigma" target="_blank" rel="noopener">github.com/SakhirCodeSigma</a>
+          </div>
+          <div class="contact-info-item">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+            <a href="https://www.linkedin.com/in/sakhiruddin/" target="_blank" rel="noopener">linkedin.com/in/sakhiruddin</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="name">SK SAKHIRUDDIN</div>
+          <div class="role">Software Developer</div>
+          <div class="loc">Howrah · Kolkata · India</div>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://github.com/SakhirCodeSigma" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/sakhiruddin/" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2026 Sk Sakhiruddin. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
