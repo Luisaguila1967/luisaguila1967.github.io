@@ -466,6 +466,18 @@
       font-size: 0.85rem;
       line-height: 1.7;
       overflow-x: auto;
+      overflow-y: auto;
+      max-height: 380px;
+    }
+    .code-body::-webkit-scrollbar {
+      width: 6px;
+    }
+    .code-body::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+    .code-body::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
     }
     .code-body .ln {
       color: var(--syntax-comment);
@@ -483,6 +495,20 @@
     .var { color: var(--syntax-var); }
     .comment { color: var(--syntax-comment); font-style: italic; }
     .num { color: #F78C6C; }
+
+    .code-body .code-line {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(8px);
+      transition: opacity 0.35s ease, transform 0.35s ease, max-height 0.35s ease;
+      display: block;
+    }
+    .code-body .code-line.visible {
+      opacity: 1;
+      max-height: 60px;
+      transform: translateY(0);
+    }
 
     /* Floating badges */
     .badge-floats {
@@ -1660,18 +1686,28 @@
               <span class="code-filename">developer.ts</span>
             </div>
             <div class="code-body">
-<span class="ln">1</span><span class="kw">const</span> <span class="var">developer</span> <span class="punct">=</span> <span class="punct">{</span><br>
-<span class="ln">2</span>&nbsp;&nbsp;<span class="prop">name</span><span class="punct">:</span> <span class="str">"Sk Sakhiruddin"</span><span class="punct">,</span><br>
-<span class="ln">3</span>&nbsp;&nbsp;<span class="prop">role</span><span class="punct">:</span> <span class="str">"Software Developer"</span><span class="punct">,</span><br>
-<span class="ln">4</span>&nbsp;&nbsp;<span class="prop">location</span><span class="punct">:</span> <span class="str">"Kolkata, India"</span><span class="punct">,</span><br>
-<span class="ln">5</span>&nbsp;&nbsp;<span class="prop">focus</span><span class="punct">:</span> <span class="punct">[</span><br>
-<span class="ln">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"React"</span><span class="punct">,</span><br>
-<span class="ln">7</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Next.js"</span><span class="punct">,</span><br>
-<span class="ln">8</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"TypeScript"</span><span class="punct">,</span><br>
-<span class="ln">9</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Node.js"</span><br>
-<span class="ln">10</span>&nbsp;&nbsp;<span class="punct">],</span><br>
-<span class="ln">11</span>&nbsp;&nbsp;<span class="prop">available</span><span class="punct">:</span> <span class="kw">true</span><br>
-<span class="ln">12</span><span class="punct">};</span>
+              <span class="ln">1</span><span class="kw">const</span> <span class="var">developer</span> <span class="punct">=</span> <span class="punct">{</span><br>
+              <span class="ln">2</span>&nbsp;&nbsp;<span class="prop">name</span><span class="punct">:</span> <span class="str">"Sk Sakhiruddin"</span><span class="punct">,</span><br>
+              <span class="ln">3</span>&nbsp;&nbsp;<span class="prop">role</span><span class="punct">:</span> <span class="str">"Software Developer"</span><span class="punct">,</span><br>
+              <span class="ln">4</span>&nbsp;&nbsp;<span class="prop">location</span><span class="punct">:</span> <span class="str">"Kolkata, India"</span><span class="punct">,</span><br>
+              <span class="ln">5</span>&nbsp;&nbsp;<span class="prop">focus</span><span class="punct">:</span> <span class="punct">[</span><br>
+              <span class="ln">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"React"</span><span class="punct">,</span><br>
+              <span class="ln">7</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Next.js"</span><span class="punct">,</span><br>
+              <span class="ln">8</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"TypeScript"</span><span class="punct">,</span><br>
+              <span class="ln">9</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Node.js"</span><span class="punct">,</span><br>
+              <span class="ln">10</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"React Native"</span><span class="punct">,</span><br>
+              <span class="ln">11</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"MongoDB"</span><span class="punct">,</span><br>
+              <span class="ln">12</span>&nbsp;&nbsp;<span class="punct">],</span><br>
+              <span class="ln">13</span>&nbsp;&nbsp;<span class="prop">skills</span><span class="punct">:</span> <span class="punct">{</span><br>
+              <span class="ln">14</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">frontend</span><span class="punct">:</span> <span class="punct">[</span><span class="str">"React"</span><span class="punct">,</span> <span class="str">"Next.js"</span><span class="punct">,</span> <span class="str">"TypeScript"</span><span class="punct">],</span><br>
+              <span class="ln">15</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">backend</span><span class="punct">:</span> <span class="punct">[</span><span class="str">"Node.js"</span><span class="punct">,</span> <span class="str">"Express"</span><span class="punct">,</span> <span class="str">"MongoDB"</span><span class="punct">]</span><br>
+              <span class="ln">16</span>&nbsp;&nbsp;<span class="punct">},</span><br>
+              <span class="ln">17</span>&nbsp;&nbsp;<span class="prop">experience</span><span class="punct">:</span> <span class="num">3</span><span class="punct">,</span><br>
+              <span class="ln">18</span>&nbsp;&nbsp;<span class="prop">openToWork</span><span class="punct">:</span> <span class="kw">true</span><span class="punct">,</span><br>
+              <span class="ln">19</span>&nbsp;&nbsp;<span class="prop">getInfo</span><span class="punct">:</span> <span class="kw">function</span><span class="punct">()</span> <span class="punct">{</span><br>
+              <span class="ln">20</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="kw">this</span><span class="punct">.</span><span class="prop">name</span> <span class="punct">+</span> <span class="str">" - "</span> <span class="punct">+</span> <span class="kw">this</span><span class="punct">.</span><span class="prop">role</span><span class="punct">;</span><br>
+              <span class="ln">21</span>&nbsp;&nbsp;<span class="punct">}</span><br>
+              <span class="ln">22</span><span class="punct">};</span>
             </div>
             <div class="badge-floats">
               <span class="float-badge b1">React</span>
@@ -2303,6 +2339,25 @@
       }
 
       document.addEventListener('DOMContentLoaded', type);
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const codeBody = document.querySelector('.code-body');
+      const rawLines = codeBody.innerHTML.split('<br>');
+      codeBody.innerHTML = rawLines.map(function (line) {
+        return '<span class="code-line">' + line.trim() + '</span>';
+      }).join('');
+      codeBody.scrollTop = 0;
+
+      const codeLines = document.querySelectorAll('.code-body .code-line');
+      codeLines.forEach(function (line, index) {
+        setTimeout(function () {
+          line.classList.add('visible');
+          codeBody.scrollTop = codeBody.scrollHeight;
+        }, index * 200);
+      });
     })();
   </script>
 
